@@ -17,7 +17,7 @@ def handle_focus_out(entry, label):
         label.place(x=wx, y=wy)
 
 def widget_binds(widgets):
-    for i in range(0, len(widgets)): 
+    for i in range(0, len(widgets)):
         if 'entry' in str(widgets[i]):
             curr_entry = widgets[i]
             curr_label = widgets[i+1]
@@ -29,7 +29,7 @@ def widget_binds(widgets):
 
 def slider_changed(bandLabel, valueName):
     bandLabel.configure(text=valueName.get())
-  
+
 def browse():
     global filename
     filename = filedialog.askopenfilename( title = "Select a File",
@@ -46,8 +46,8 @@ def shellCmd(path, afilters, newfile, type_run):
     if type_run == "start":
         shell_cmd = [
             "ffmpeg",
-            "-loglevel", "error", 
-            "-i", path, 
+            "-loglevel", "error",
+            "-i", path,
             "-y",
             "-filter:a", afilters]
 
@@ -112,7 +112,7 @@ def runCmd(type_run):
     else:
         speed_type = "[normalspeed]"
 
-    new_file_name = path+song+speed_type+extension 
+    new_file_name = path+song+speed_type+extension
 
     if len(speed_input) > 0:
         filters = "aresample=44100:resampler=soxr:dither_method=triangular:\
@@ -146,10 +146,10 @@ def runCmd(type_run):
     elif type_run == "start":
         shellCmd(filename, filters, new_file_name, type_run)
     return
-                                                                                                  
+
 # init
 window = Tk()
-window.tk.call("source", "azure.tcl")      
+window.tk.call("source", "azure.tcl")
 window.tk.call("set_theme", "dark")
 window.title('NxC')
 window.geometry("950x420")
@@ -165,7 +165,7 @@ band4_value = IntVar()
 band5_value = IntVar()
 sliderup="+10"
 sliderdown="-10"
-  
+
 # widgets
 label_file_explorer = ttk.Label(window,
                         text = "Select a File to NxC",
@@ -176,11 +176,11 @@ label_status = ttk.Label(window,
                         text = "",
                         width = 100,
                         wraplength=700)
-      
+
 button_explore = ttk.Button(window,
                         text = "Browse Files",
                         command = browse)
-  
+
 button_exit = ttk.Button(window,
                         text = "Exit",
                         command = close)
@@ -193,10 +193,10 @@ button_start = ttk.Button(window,
                         text = "start",
                         command = lambda: [ runCmd("start") ])
 
-strip_vid_button = ttk.Checkbutton(window, 
+strip_vid_button = ttk.Checkbutton(window,
                         text="remove video?",
-                        variable=stripVid, 
-                        onvalue=1, 
+                        variable=stripVid,
+                        onvalue=1,
                         offvalue=0)
 
 speed_label = ttk.Label(window, text = "pitch")
@@ -205,40 +205,31 @@ speed_entry.insert(END,"1.3")
 
 tempo_label = ttk.Label(window, text = "tempo")
 tempo_entry = ttk.Entry(window)
-tempo_default_label = ttk.Label(window, 
-                                        text = "",
-                                        foreground="grey")
+tempo_default_label = ttk.Label(window, text = "", foreground="grey")
 
 echo_overall_volume = ttk.Entry(window)
 echo_overall_volume_label = ttk.Label(window, text = "Echo Full Volume")
-echo_overall_volume_default_label = ttk.Label(window, 
-                                        text = "0-1 (1)",
-                                        foreground="grey")
+echo_overall_volume_default_label = ttk.Label(window, text = "0-1 (1)", foreground="grey")
 
 echo_volume = ttk.Entry(window)
 echo_volume_label = ttk.Label(window, text = "Echo Volume")
-echo_volume_label_default = ttk.Label(window, text = "0-1 (0.7)",
-        foreground="grey")
+echo_volume_label_default = ttk.Label(window, text = "0-1 (0.7)", foreground="grey")
 
 echo_delay = ttk.Entry(window)
 echo_delay_label = ttk.Label(window, text = "Echo Delay (ms)")
-echo_delay_label_default = ttk.Label(window, text = "0-50",
-        foreground="grey")
+echo_delay_label_default = ttk.Label(window, text = "0-50", foreground="grey")
 
 echo_decay = ttk.Entry(window)
 echo_decay_label = ttk.Label(window, text = "Echo Decay")
-echo_decay_label_default = ttk.Label(window, text = "0-1 (0.5)", 
-        foreground="grey")
+echo_decay_label_default = ttk.Label(window, text = "0-1 (0.5)", foreground="grey")
 
 crusher_sample_entry = ttk.Entry(window)
 c_sample_label = ttk.Label(window, text = "Crusher Sample")
-c_sample_default_label = ttk.Label(window, text = "0-100 (5-10)", 
-        foreground="grey")
+c_sample_default_label = ttk.Label(window, text = "0-100 (5-10)", foreground="grey")
 
 crusher_bits_entry = ttk.Entry(window)
 c_bits_label = ttk.Label(window, text = "Crusher Bits")
-c_bits_default_label = ttk.Label(window, text = "(8)", 
-        foreground="grey")
+c_bits_default_label = ttk.Label(window, text = "(8)", foreground="grey")
 
 band1_label = ttk.Label( window, text='60Hz')
 band1_val_label = ttk.Label( window, text='0')
@@ -255,7 +246,7 @@ band1 = ttk.Scale(
     window,
     from_=int(sliderup),
     to=int(sliderdown),
-    orient='vertical', 
+    orient='vertical',
     command = lambda event: slider_changed(band1_val_label, band1_value),
     variable=band1_value
 )
@@ -264,7 +255,7 @@ band2 = ttk.Scale(
     window,
     from_=int(sliderup),
     to=int(sliderdown),
-    orient='vertical', 
+    orient='vertical',
     command = lambda event: slider_changed(band2_val_label, band2_value),
     variable=band2_value
 )
@@ -273,7 +264,7 @@ band3 = ttk.Scale(
     window,
     from_=int(sliderup),
     to=int(sliderdown),
-    orient='vertical', 
+    orient='vertical',
     command = lambda event: slider_changed(band3_val_label, band3_value),
     variable=band3_value
 )
@@ -282,7 +273,7 @@ band4 = ttk.Scale(
     window,
     from_=int(sliderup),
     to=int(sliderdown),
-    orient='vertical', 
+    orient='vertical',
     command = lambda event: slider_changed(band4_val_label, band4_value),
     variable=band4_value
 )
@@ -291,7 +282,7 @@ band5 = ttk.Scale(
     window,
     from_=int(sliderup),
     to=int(sliderdown),
-    orient='vertical', 
+    orient='vertical',
     command = lambda event: slider_changed(band5_val_label, band5_value),
     variable=band5_value
 )

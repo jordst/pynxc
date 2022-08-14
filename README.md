@@ -3,6 +3,9 @@
 A front-end for ffmpeg and ffplay for applying audio effects to audio
 files. Made with python and tkinter.
 
+# Preview
+![screenshot of the program running](./img/preview.png)
+
 ## Dependencies
 * ffmpeg (applying effects)
 * ffplay (previewing effects)

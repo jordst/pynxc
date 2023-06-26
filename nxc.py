@@ -90,7 +90,9 @@ def runCmd(type_run):
     song_pos = int(filename.rindex("/"))
     song = filename[song_pos+1:extension_pos]
     path = filename[:song_pos+1]
+    filters = ""
 
+    volume_input = volume_entry.get()
     speed_input = speed_entry.get()
     tempo_input = tempo_entry.get()
     crusher_sample = crusher_sample_entry.get()
@@ -128,6 +130,11 @@ def runCmd(type_run):
     if len(echo_o_vol) > 0 and len(echo_vol) > 0 and \
         len(echo_del) > 0 and len(echo_dec) > 0:
             filters += ",aecho="+echo_o_vol+":"+echo_vol+":"+echo_del+":"+echo_dec
+
+    if len(volume_input) > 0:
+        filters += ",volume="+volume_input
+    else:
+        filters += ",volume=1"
 
     if b1 != 0:
         filters += ",equalizer=f=60:t=h:w=100:g="+str(b1)
@@ -202,6 +209,11 @@ strip_vid_button = ttk.Checkbutton(window,
 speed_label = ttk.Label(window, text = "pitch")
 speed_entry = ttk.Entry(window)
 speed_entry.insert(END,"1.3")
+
+volume_label = ttk.Label(window, text = "volume")
+volume_entry = ttk.Entry(window)
+volume_default_label = ttk.Label(window, text = "1", foreground="grey")
+#volume_entry.insert(END,"1")
 
 tempo_label = ttk.Label(window, text = "tempo")
 tempo_entry = ttk.Entry(window)
@@ -302,7 +314,9 @@ widget_list = [
         echo_decay,
         echo_decay_label_default,
         tempo_entry,
-        tempo_default_label
+        tempo_default_label,
+        volume_entry,
+        volume_default_label
         ]
 
 widget_binds_list = widget_binds(widget_list)
@@ -313,7 +327,7 @@ button_explore.place(x=10,y=10)
 button_preview.place(x=15, y=330)
 button_start.place(x=120, y=330)
 button_exit.place(x=605, y=330)
-label_status.place(x=0, y=250)
+label_status.place(x=0, y=275)
 strip_vid_button.place(x=225, y=333)
 
 band1.place(x=635, y=105)
@@ -350,6 +364,10 @@ c_sample_default_label.place(x=125, y=165)
 crusher_bits_entry.place(x=120, y=200)
 c_bits_label.place(x=20, y=203)
 c_bits_default_label.place(x=125, y=205)
+
+volume_entry.place(x=120, y=240)
+volume_label.place(x=20, y=243)
+volume_default_label.place(x=125, y=245)
 
 echo_overall_volume.place(x=410, y=80)
 echo_overall_volume_label.place(x=290, y=83)

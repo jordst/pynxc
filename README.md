@@ -12,6 +12,7 @@ Made with python and tkinter.
 * crusher
 * echo
 * 5 band equalizer
+* volume
 
 ## Dependencies
 * ffmpeg (applying effects)
